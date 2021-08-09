@@ -1,2 +1,11 @@
 image:
   file: .gitpod.Dockerfile
+  
+# Commands to start on workspace startup
+tasks:
+  - init: npm i
+    command: ng build && firebase login --no-localhost && firebase serve
+# Ports to expose on workspace startup
+ports:
+  - port: 5000
+    onOpen: open-browser
