@@ -1,0 +1,33 @@
+<!-- <div class="modal fade show" id="cameraModal" tabindex="-1" style="display: block;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" style="padding: .5rem;">Take Picture</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="close()"></button>
+        </div>
+        <div class="modal-body p-0">
+            <video #video id="video" style="width: 100%; height: auto;" ></video>
+        </div>
+        <div class="modal-footer p-1">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="capture()">Capture</button>
+          <button type="button" class="btn btn-primary" (click)="switchCamera()">Switch Camera</button>
+        </div>
+      </div>
+    </div>
+</div>
+<div class="modal-backdrop fade show"></div> -->
+
+  <div class="border">
+    <video #video id="video" class="w-100" ></video>
+    <div class="text-center w-100 position-relative" style="margin-top: -72px;">
+        <button type="button" class="btn me-2 text-light" (click)="capture()"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-camera" viewBox="0 0 16 16">
+            <path d="M15 12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h1.172a3 3 0 0 0 2.12-.879l.83-.828A1 1 0 0 1 6.827 3h2.344a1 1 0 0 1 .707.293l.828.828A3 3 0 0 0 12.828 5H14a1 1 0 0 1 1 1v6zM2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2z"/>
+            <path d="M8 11a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5zm0 1a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM3 6.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"/>
+          </svg></button>
+        <button type="button" class="btn text-light" (click)="switchCamera()"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-arrow-repeat" viewBox="0 0 16 16">
+            <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z"/>
+            <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z"/>
+          </svg></button>
+    </div>
+  </div>
+

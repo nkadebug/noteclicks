@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "noteclicks": {
+      "hosting": {
+        "noteclicks": [
+          "noteclicks"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "noteclicks"
+  }
+}

@@ -4,8 +4,8 @@ image:
 # Commands to start on workspace startup
 tasks:
   - init: npm i
-    command: ng build && firebase login --no-localhost && firebase serve
+    command: ng serve
 # Ports to expose on workspace startup
 ports:
-  - port: 5000
+  - port: 4200
     onOpen: open-browser
