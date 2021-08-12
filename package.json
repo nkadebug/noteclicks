@@ -6,7 +6,9 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "push": "git add . && git commit -m \"minor update [skip ci]\" && git push -u main",
+    "deploy": "git add . && git commit -m \"Deploy\" && git push -u main"
   },
   "private": true,
   "dependencies": {
