@@ -3,34 +3,39 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { NoteComponent } from './pages/note/note.component';
 import { P404Component } from './pages/p404/p404.component';
+import { SigninComponent } from './pages/signin/signin.component';
 import { TimelineComponent } from './pages/timeline/timeline.component';
 
 const routes: Routes = [
   {
-    path:'home',
-    component:HomeComponent
+    path: 'signin',
+    component: SigninComponent,
   },
   {
-    path:'timeline',
-    component:TimelineComponent
+    path: 'home',
+    component: HomeComponent,
   },
   {
-    path:'note/:id',
-    component:NoteComponent
+    path: 'timeline',
+    component: TimelineComponent,
   },
   {
-    path:'',
-    pathMatch:'full',
-    redirectTo:'home'
+    path: 'note/:id',
+    component: NoteComponent,
   },
   {
-    path:'**',
-    component:P404Component
-  }
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'signin',
+  },
+  {
+    path: '**',
+    component: P404Component,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
