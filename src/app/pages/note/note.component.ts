@@ -147,7 +147,7 @@ export class NoteComponent implements OnInit, OnDestroy {
     this.idb.notes
       .put(this.currNote)
       .then(() => {
-        this.router.navigate(['']);
+        this.router.navigate(['home']);
       })
       .catch((e) => {
         console.log(e);
@@ -172,7 +172,7 @@ export class NoteComponent implements OnInit, OnDestroy {
           this.idb.notes
             .put(note)
             .then(() => {
-              this.router.navigate(['']);
+              this.router.navigate(['home']);
             })
             .catch((e) => {
               console.log(e);

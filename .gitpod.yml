@@ -7,4 +7,5 @@ tasks:
 
 ports:
   - port: 4200
+    visibility: public
     onOpen: open-browser

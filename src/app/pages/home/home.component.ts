@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit {
   constructor(private idb: IdbService) { }
 
   ngOnInit(): void {
+    console.log(localStorage.uid);
     this.idb.notes.where("uid").equals(localStorage.uid).count().then(count => {
       this.totalCount = count;
       this.showNoteList(0);

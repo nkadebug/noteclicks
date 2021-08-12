@@ -70,7 +70,6 @@ export class IdbService extends Dexie {
 
       } else {
         console.log('All docs fetched');
-        localStorage.idbInitialized = true;
       }
     });
   }
