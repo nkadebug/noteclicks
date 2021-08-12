@@ -1,11 +1,10 @@
 image:
   file: .gitpod.Dockerfile
-  
-# Commands to start on workspace startup
+
 tasks:
   - init: npm i
     command: ng serve
-# Ports to expose on workspace startup
+
 ports:
   - port: 4200
     onOpen: open-browser
