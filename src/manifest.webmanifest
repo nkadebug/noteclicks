@@ -1,7 +1,7 @@
 {
-  "name": "noteclicks",
-  "short_name": "noteclicks",
-  "theme_color": "#1976d2",
+  "name": "Note Clicks",
+  "short_name": "Note Clicks",
+  "theme_color": "#0d6efd",
   "background_color": "#fafafa",
   "display": "standalone",
   "scope": "./",

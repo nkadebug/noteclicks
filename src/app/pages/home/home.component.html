@@ -1,4 +1,6 @@
 <app-fab></app-fab>
-<p>
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium corporis placeat nesciunt eligendi mollitia assumenda vitae labore ad. Suscipit voluptate doloribus amet fugit aliquam consequuntur impedit delectus eaque rerum in.
-</p>
+<div *ngFor="let note of notes">
+    <a class="d-block border rounded overflow-hidden mb-1" routerLink="/note/{{note.id}}"><img src="{{note.photo}}" class="w-25 me-1"/> {{note.description}} [{{note.created_at | date:'dd-MM-yy hh:mm:ss a' }}]</a>
+</div>
+<button *ngIf="showPrevBtn" class="btn btn-primary" (click)="prev()">Prev</button>
+<button *ngIf="showNextBtn" class="btn btn-primary" (click)="next()">Next</button>

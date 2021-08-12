@@ -1,0 +1,3 @@
+<div>
+    <a *ngFor="let note of notes" routerLink="/note/{{note.id}}"><p>{{note.description}} <img src="{{note.photo}}" class="w-100 me-1"/></p></a>
+</div>
