@@ -8,6 +8,7 @@ import { Component, OnInit, AfterViewInit, ViewChild, OnDestroy, EventEmitter, O
 export class CameraComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input('width') width: Number = 100;
   @Input('height') height: Number = 100;
+  @Input('show-control') showControl = true;
   @Output() onClose: EventEmitter<any> = new EventEmitter();
 
   @ViewChild('video', { static: true }) video: any = document.querySelector('#video');
@@ -63,4 +64,13 @@ export class CameraComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
+  // onPlay(){
+  //   console.log('Video Played');
+  //   this.showControl = true;
+  // }
+
+  // onPause(){
+  //   console.log('Video Paused');
+  //   this.showControl = false;
+  // }
 }

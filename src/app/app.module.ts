@@ -24,6 +24,7 @@ import { FabComponent } from './components/fab/fab.component';
 import { BiComponent } from './components/bi/bi.component';
 import { TimelineComponent } from './pages/timeline/timeline.component';
 import { SigninComponent } from './pages/signin/signin.component';
+import { QuickComponent } from './pages/quick/quick.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { SigninComponent } from './pages/signin/signin.component';
     FabComponent,
     BiComponent,
     TimelineComponent,
-    SigninComponent
+    SigninComponent,
+    QuickComponent
   ],
   imports: [
     BrowserModule,

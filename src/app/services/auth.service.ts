@@ -16,10 +16,10 @@ export class AuthService {
       this.user.next(user);
       if (user) {
         localStorage.uid = user.uid;
-        router.navigate(['home']);
+        //router.navigate(['home']);
       } else {
         localStorage.removeItem('uid');
-        router.navigate(['signin']);
+        //router.navigate(['signin']);
       }
     });
   }

@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { NoteComponent } from './pages/note/note.component';
 import { P404Component } from './pages/p404/p404.component';
+import { QuickComponent } from './pages/quick/quick.component';
 import { SigninComponent } from './pages/signin/signin.component';
 import { TimelineComponent } from './pages/timeline/timeline.component';
 
@@ -24,9 +25,13 @@ const routes: Routes = [
     component: NoteComponent,
   },
   {
+    path: 'quick',
+    component: QuickComponent
+  },
+  {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'signin',
+    redirectTo: 'quick',
   },
   {
     path: '**',
