@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Note } from 'src/app/model/note';
 import { AuthService } from 'src/app/services/auth.service';
 import { IdbService } from 'src/app/services/idb.service';
@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
   currIndex = 0;
   showPrevBtn = false;
   showNextBtn = false;
-  limit = 9;
+  limit = 15;
 
   constructor(
     private auth: AuthService,
@@ -37,12 +37,14 @@ export class HomeComponent implements OnInit {
   }
 
 
-
+  loadingNewItems = false;
   showNoteList(offset = 0) {
+    this.loadingNewItems = true;
     offset = this.totalCount - offset - this.limit;
     console.log(offset, this.totalCount);
     this.idb.notes.where("uid").equals(this.auth.uid).offset(offset < 0 ? 0 : offset).limit(offset < 0 ? this.limit + offset : this.limit).toArray().then(arr => {
-      this.notes = arr.sort((a, b) => parseInt(b.id) - parseInt(a.id));
+      this.notes = [...this.notes,...arr.sort((a, b) => parseInt(b.id) - parseInt(a.id))];
+      this.loadingNewItems = false;
     });
 
     console.log(this.totalCount, this.currIndex, this.limit);
@@ -58,8 +60,16 @@ export class HomeComponent implements OnInit {
   }
 
   next() {
+    console.log('loading next');
     this.currIndex++;
     this.showNoteList(this.currIndex * this.limit);
+  }
+
+  scrollHandler(event: any) {
+    console.log(event);
+    if(event == 'bottom' && !this.loadingNewItems){
+      this.next();
+    }
   }
 
 }

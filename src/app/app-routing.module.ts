@@ -31,7 +31,7 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'quick',
+    redirectTo: 'home',
   },
   {
     path: '**',

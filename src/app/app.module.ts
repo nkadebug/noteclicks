@@ -25,6 +25,7 @@ import { BiComponent } from './components/bi/bi.component';
 import { TimelineComponent } from './pages/timeline/timeline.component';
 import { SigninComponent } from './pages/signin/signin.component';
 import { QuickComponent } from './pages/quick/quick.component';
+import { ScrollableDirective } from './directives/scrollable.directive';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { QuickComponent } from './pages/quick/quick.component';
     BiComponent,
     TimelineComponent,
     SigninComponent,
-    QuickComponent
+    QuickComponent,
+    ScrollableDirective
   ],
   imports: [
     BrowserModule,

@@ -1,8 +1,18 @@
 a{
     text-decoration: none !important;
 }
-a.quick{
-    position: fixed;
-    bottom: 1rem;
-    left: 1rem;
+#notes{
+    max-height: calc(100vh - 60px);
+    overflow-y: scroll;
+}
+.caption{
+    font-size: smaller;
+    background: rgba(0,0,0,0.5);
+    color: white !important;
+    margin-top: -20px;
+    z-index: 2;
+    position: relative;
+}
+img{
+    z-index: 1;
 }

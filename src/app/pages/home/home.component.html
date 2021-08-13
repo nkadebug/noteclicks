@@ -1,13 +1,21 @@
 <app-navbar></app-navbar>
 <app-fab></app-fab>
-<div class="container">
-<div class="row">
-<div *ngFor="let note of notes" class="col-4 p-0">
-    <a routerLink="/note/{{note.id}}"><img src="{{note.photo}}" class="w-100" style="padding: 1px;"/></a>
-</div>
-</div>
-</div>
-<button *ngIf="showPrevBtn" class="btn btn-primary" (click)="prev()">Prev</button>
-<button *ngIf="showNextBtn" class="btn btn-primary" (click)="next()">Next</button>
 
-<a *ngIf="false" routerLink="/quick" class="quick btn rounded-circle btn-danger text-light"><app-bi icon="lightning-charge-fill" [size]="48"></app-bi></a>
+<div id="notes" class="container" appScrollable (scrollPosition)="scrollHandler($event)">
+    <div class="row">
+        <div *ngFor="let note of notes" class="col-4 p-0">
+            <a routerLink="/note/{{note.id}}"><img src="{{note.photo}}" class="w-100" style="padding: 1px;" /><div class="text-secondary text-center caption">{{note.created_at | date:'dd-MM-yyyy hh:mm:ss'}}</div></a>
+        </div>
+    </div>
+</div>
+
+<nav *ngIf="false" class="p-2">
+    <ul class="pagination justify-content-center">
+      <li class="page-item" [class]="{'disabled':!showPrevBtn}">
+        <button class="page-link" (click)="prev()">Previous</button>
+      </li>
+      <li class="page-item" [class]="{'disabled':!showNextBtn}">
+        <button class="page-link" (click)="next()">Next</button>
+      </li>
+    </ul>
+</nav>
