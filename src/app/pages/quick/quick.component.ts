@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Note } from 'src/app/model/note';
+import { AuthService } from 'src/app/services/auth.service';
 import { IdbService } from 'src/app/services/idb.service';
 
 @Component({
@@ -10,7 +11,7 @@ import { IdbService } from 'src/app/services/idb.service';
 })
 export class QuickComponent implements OnInit {
 
-  constructor(private idb: IdbService, private router: Router) {
+  constructor(private idb: IdbService, private router: Router, private auth: AuthService) {
 
   }
 
@@ -36,7 +37,8 @@ export class QuickComponent implements OnInit {
       _canvas.height = _video.videoHeight;
       _canvas.getContext('2d').drawImage(_video, 0, 0);
       let photo = _canvas.toDataURL();
-      console.log(photo);
+      // console.log(photo);
+      this.addNote(photo);
 
       setTimeout(() => {
         _video.play();
@@ -51,10 +53,11 @@ export class QuickComponent implements OnInit {
     let ts = Date.now();
     let note: Note = {
       id: ts + "",
-      uid: localStorage.uid,
+      uid: this.auth.uid,
       trashed: false,
       created_at: ts,
       updated_at: ts,
+      photo
     }
     this.idb.notes.add(note);
   }

@@ -15,6 +15,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Note } from 'src/app/model/note';
 import { IdbService } from 'src/app/services/idb.service';
 import { FormControl, FormGroup } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-note',
@@ -36,11 +37,11 @@ export class NoteComponent implements OnInit, OnDestroy {
     private storage: AngularFireStorage,
     private db: AngularFireDatabase,
     private fs: AngularFirestore,
-    private idb: IdbService
+    private idb: IdbService,
+    private auth: AuthService
   ) {}
 
   ngOnDestroy(): void {}
-
   newNote = true;
   noteId = '';
   noteFrom = new FormGroup({
@@ -52,6 +53,7 @@ export class NoteComponent implements OnInit, OnDestroy {
       console.log(params);
       this.newNote = params.id == 'new';
       if (params.id == 'new') {
+        this.locked= false;
         this.drawPlaceholder();
         this.openCamera();
       } else {
@@ -62,7 +64,7 @@ export class NoteComponent implements OnInit, OnDestroy {
   }
 
   openCamera() {
-    this.isCameraOpen = true;
+    this.isCameraOpen = !this.locked;
   }
 
   captured = false;
@@ -77,6 +79,8 @@ export class NoteComponent implements OnInit, OnDestroy {
       _canvas.height = _video.videoHeight;
       _canvas.getContext('2d').drawImage(_video, 0, 0);
       if (!this.noteId) this.noteId = Date.now() + '';
+    }else{
+      this.router.navigate(['home']);
     }
   }
 
@@ -128,9 +132,7 @@ export class NoteComponent implements OnInit, OnDestroy {
 
     if (this.currNote) {
       this.currNote.updated_at = ts;
-      this.currNote.photo = this.captured
-        ? _canvas.toDataURL('image/jpeg', 0.5)
-        : null;
+      this.currNote.photo =  _canvas.toDataURL('image/jpeg', 0.5);
       this.currNote.description = this.noteFrom.value.description;
     } else {
       this.currNote = {
@@ -139,7 +141,7 @@ export class NoteComponent implements OnInit, OnDestroy {
         updated_at: ts,
         photo: this.captured ? _canvas.toDataURL('image/jpeg', 0.5) : null,
         description: this.noteFrom.value.description,
-        uid: localStorage.uid,
+        uid: this.auth.uid,
         trashed: false,
       };
     }
@@ -147,7 +149,11 @@ export class NoteComponent implements OnInit, OnDestroy {
     this.idb.notes
       .put(this.currNote)
       .then(() => {
-        this.router.navigate(['home']);
+        //this.router.navigate(['home']);
+        this.isCameraOpen = true;
+        this.currNote = null;
+        this.noteId = "";
+        this.noteFrom.setValue({ description: "" })
       })
       .catch((e) => {
         console.log(e);
@@ -182,5 +188,10 @@ export class NoteComponent implements OnInit, OnDestroy {
       .catch((e) => {
         console.log(e);
       });
+  }
+  locked = true;
+
+  editNote(){
+    this.locked = false;
   }
 }

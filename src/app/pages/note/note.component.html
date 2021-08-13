@@ -1,19 +1,16 @@
 <app-navbar></app-navbar>
-<div [class]="{'d-none':isCameraOpen}">
-    <canvas #canvas id="canvas" class="w-100 border" (click)="openCamera()"></canvas>
-    <div class="text-center d-none">
-        <button type="button" class="btn me-2" (click)="openCamera()">Retake <img style="width: 48px; height: 48px;"
-                src="assets/bsi/arrow-repeat.svg" /></button>
-    </div>
+<div [class]="{'d-none':isCameraOpen}" class="my-0 py-0">
+    <canvas #canvas id="canvas" class="w-100" (click)="openCamera()"></canvas>
 </div>
 <app-camera *ngIf="true || isCameraOpen" [class]="{'d-none':!isCameraOpen}" [width]="width" [height]="height"
     (onClose)="drawCaptured($event)"></app-camera>
 
-<form [formGroup]="noteFrom" (ngSubmit)="saveNote()" *ngIf="!isCameraOpen" class="mt-2">
-    <textarea class="form-control mt-1" cols="30" rows="2" placeholder="Description"
+<form [formGroup]="noteFrom" (ngSubmit)="saveNote()" *ngIf="!isCameraOpen" class="my-0">
+    <textarea [readonly]="locked" class="form-control" cols="30" rows="2" placeholder="Description"
         formControlName="description"></textarea>
     <div class="text-center mt-2">
-        <button class="btn btn-success" type="submit">Save</button>
+        <button *ngIf ="locked" class="btn btn-info" (click)="editNote()">Edit</button>
+        <button *ngIf ="!locked" class="btn btn-success" type="submit">Save</button>
         <button *ngIf="!newNote" class="btn btn-danger ms-2" (click)="trashNote()">Trash</button>
     </div>
 </form>

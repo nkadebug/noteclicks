@@ -9,18 +9,15 @@ import { User } from '../model/user';
   providedIn: 'root',
 })
 export class AuthService {
+
+  uid = "";
   user = new BehaviorSubject<User | null>(null);
+  
 
   constructor(public auth: AngularFireAuth, private router: Router) {
     this.auth.authState.subscribe((user) => {
+      this.uid = user?user.uid:"";
       this.user.next(user);
-      if (user) {
-        localStorage.uid = user.uid;
-        //router.navigate(['home']);
-      } else {
-        localStorage.removeItem('uid');
-        //router.navigate(['signin']);
-      }
     });
   }
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Note } from 'src/app/model/note';
+import { AuthService } from 'src/app/services/auth.service';
 import { IdbService } from 'src/app/services/idb.service';
 
 @Component({
@@ -15,28 +16,39 @@ export class HomeComponent implements OnInit {
   currIndex = 0;
   showPrevBtn = false;
   showNextBtn = false;
-  limit = 10;
-  
-  constructor(private idb: IdbService) { }
+  limit = 9;
+
+  constructor(
+    private auth: AuthService,
+    private idb: IdbService
+  ) { }
 
   ngOnInit(): void {
-    console.log(localStorage.uid);
-    this.idb.notes.where("uid").equals(localStorage.uid).count().then(count => {
-      this.totalCount = count;
-      this.showNoteList(0);
+    this.auth.user.subscribe(user => {
+      if (user) {
+        this.idb.notes.where("uid").equals(this.auth.uid).count().then(count => {
+          this.totalCount = count;
+          this.showNoteList();
+        });
+      } else {
+        this.notes = [];
+      }
     });
   }
 
-  
 
-  showNoteList(offset: number) {
-    this.idb.notes.where("uid").equals(localStorage.uid).offset(this.totalCount-offset-this.limit).limit(this.limit).toArray().then(arr => {
-      this.notes = arr.sort((a,b)=>parseInt(b.id)-parseInt(a.id));
+
+  showNoteList(offset = 0) {
+    offset = this.totalCount - offset - this.limit;
+    console.log(offset, this.totalCount);
+    this.idb.notes.where("uid").equals(this.auth.uid).offset(offset < 0 ? 0 : offset).limit(offset < 0 ? this.limit + offset : this.limit).toArray().then(arr => {
+      this.notes = arr.sort((a, b) => parseInt(b.id) - parseInt(a.id));
     });
 
-    console.log(this.totalCount,this.currIndex,this.limit);
+    console.log(this.totalCount, this.currIndex, this.limit);
 
-    this.showNextBtn = this.totalCount > (this.limit+1) * this.currIndex;
+    // this.showNextBtn = this.totalCount > (this.limit + 1) * this.currIndex;
+    this.showNextBtn = offset > 0
     this.showPrevBtn = !!this.currIndex;
   }
 
