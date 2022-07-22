@@ -2,11 +2,11 @@
   "name": "noteclicks",
   "version": "0.0.0",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test",
+    "ng": "npx ng",
+    "start": "npx ng serve",
+    "build": "npx ng build",
+    "watch": "npx ng build --watch --configuration development",
+    "test": "npx ng test",
     "push": "git add . && git commit -m \"minor update [skip ci]\" && git push",
     "deploy": "git add . && git commit -m \"Deploy\" && git push"
   },
